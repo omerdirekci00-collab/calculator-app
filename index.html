@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+      color: white;
+    }
+
+    .calculator-container {
+      width: 340px;
+      background: #111827;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .title h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .title p {
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+    .display {
+      width: 100%;
+      height: 80px;
+      background: #020617;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: right;
+      font-size: 32px;
+      color: #f8fafc;
+      overflow-x: auto;
+      border: 1px solid #334155;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    button {
+      height: 60px;
+      border: none;
+      border-radius: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #1f2937;
+      color: white;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #374151;
+    }
+
+    .operator {
+      background: #2563eb;
+    }
+
+    .operator:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #dc2626;
+    }
+
+    .clear:hover {
+      background: #b91c1c;
+    }
+
+    .equal {
+      background: #16a34a;
+      grid-column: span 2;
+    }
+
+    .equal:hover {
+      background: #15803d;
+    }
+
+    .zero {
+      grid-column: span 2;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="calculator-container">
+    <div class="title">
+      <h1>Calculator App</h1>
+      <p>Simple calculator built with HTML, CSS and JavaScript</p>
+    </div>
+
+    <div class="display" id="display">0</div>
+
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">DEL</button>
+      <button class="operator" onclick="appendValue('/')">÷</button>
+      <button class="operator" onclick="appendValue('*')">×</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button class="operator" onclick="appendValue('-')">−</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button class="operator" onclick="appendValue('+')">+</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('.')">.</button>
+
+      <button class="zero" onclick="appendValue('0')">0</button>
+      <button class="equal" onclick="calculateResult()">=</button>
+    </div>
+
+    <div class="footer">
+      Developed by Ömer Direkçi
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function appendValue(value) {
+      if (display.innerText === "0" || display.innerText === "Error") {
+        display.innerText = value;
+      } else {
+        display.innerText += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function deleteLast() {
+      if (display.innerText.length === 1 || display.innerText === "Error") {
+        display.innerText = "0";
+      } else {
+        display.innerText = display.innerText.slice(0, -1);
+      }
+    }
+
+    function calculateResult() {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch {
+        display.innerText = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
